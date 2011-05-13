@@ -1,4 +1,36 @@
 #lang racket
+
+(define (inc n) (+ n 1))
+(define (dec n) (- n 1))
+
+;; 1.9
+(define (recursive-+ a b)
+  (if (= a 0)
+      b
+      (inc (recursive-+ (dec a) b))))
+#|
+(recursive-+ 3 1)
+(inc (recursive-+ 2 1))
+(inc (inc (recursive-+ 1 1)))
+(inc (inc (inc (recursive-+ 0 1))))
+(inc (inc (inc 1)))
+(inc (inc 2))
+(inc 3)
+4
+|#
+
+(define (iterative-+ a b)
+  (if (= a 0)
+      b
+      (iterative-+ (dec a) (inc b))))
+#|
+(iterative-+ 3 1)
+(iterative-+ 2 2)
+(iterative-+ 1 3)
+(iterative-+ 0 4)
+4
+|#
+
 ;; 1.10
 (define (A x y)
   (cond ((= y 0) 0)
@@ -45,7 +77,7 @@
 (A 2 3)
 (A 1 (A 2 2))
 (A 1 4)
-(A 0 (A 1 3)) ;; 2(2^n)
+(A 0 (A 1 3))
 (A 0 8)
 16
 
@@ -56,7 +88,6 @@
 (A 1 (A 1 (A 1 2)))
 (A 1 (A 1 4))
 (A 1 16)
-;; 2^(n^2)
 
 (A 2 5)
 (A 1 (A 2 4))
@@ -65,9 +96,6 @@
 (A 1 (A 1 (A 1 (A 1 (A 2 1)))))
 (A 1 (A 1 (A 1 (A 1 2))))
 |#
-
-(define (k n) (* 5 n n))
-
 
 #|
 Exercise 1.11.  A function f is defined by the rule that
