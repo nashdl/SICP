@@ -114,9 +114,7 @@ Write a procedure that computes f by means of an iterative process.
 
 
 (define (iterative-f n)
-  (if (< n 3)
-      n
-      (iter-f 2 1 0 (dec n))))
+  (iter-f 2 1 0 (dec n)))
 
 (define (iter-f n-1 n-2 n-3 n)
   (if (< n 3)
