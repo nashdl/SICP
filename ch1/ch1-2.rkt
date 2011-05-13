@@ -108,8 +108,20 @@ Write a procedure that computes f by means of an iterative process.
 (define (recursive-f n)
   (if (< n 3)
       n
-      (+ (f (- n 1))
-         (* 2 (f (- n 2)))
-         (* 3 (f (- n 3))))))
+      (+ (recursive-f (- n 1))
+         (* 2 (recursive-f (- n 2)))
+         (* 3 (recursive-f (- n 3))))))
 
 
+(define (iterative-f n)
+  (if (< n 3)
+      n
+      (iter-f 2 1 0 (dec n))))
+
+(define (iter-f n-1 n-2 n-3 n)
+  (if (< n 3)
+      (+ n-1 (* 2 n-2) (* 3 n-3))
+      (iter-f (+ n-1 (* 2 n-2) (* 3 n-3))
+              n-1
+              n-2
+              (dec n))))
