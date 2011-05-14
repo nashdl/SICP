@@ -125,3 +125,21 @@ Write a procedure that computes f by means of an iterative process.
               n-1
               n-2
               (dec n))))
+
+#|
+Exercise 1.12 - Pascal's Triangle
+     1
+    1 1
+   1 2 1
+  1 3 3 1
+ 1 4 6 4 1
+|#
+
+(define (pascal-triangle r c)
+  (define out-of-bounds? (or (> c r) (< c 0)))
+  (define edge? (or (= c 1) (= r c)))
+  (cond
+   (out-of-bounds? 0)
+   (edge? 1)
+   (else (+ (pascal-triangle (dec r) (dec c))
+            (pascal-triangle (dec r) c)))))
