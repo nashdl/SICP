@@ -1,0 +1,8 @@
+(define (mult a b)
+  (define (double a) (+ a a))
+  (define (halve a) (/ a 2))
+  (define (mult-iter a b n)
+    (cond ((= b 0) n)
+          ((even? b) (mult-iter (double a) (halve b) n))
+          (else (mult-iter a (- b 1) (+ n a)))))
+  (mult-iter a b 0))
