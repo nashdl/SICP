@@ -1,0 +1,32 @@
+(gcd 206 40)
+b is evaluated each time because of the (= b 0) check
+
+(gcd b (remainder a b))
+
+normal order
+(gcd 40 (remainder 206 40))
+b = 6
+(gcd 6 (remainder a 6))
+b = 4
+(gcd 4 (remainder a 4))
+b = 2
+(gcd 2 (remainder a 2))
+b = 0
+
+remainder performed 4 times
+
+applicative order
+(gcd 40 (remainder 206 40))
+(gcd 40 6)
+(gcd 6 (remainder 40 6))
+(gcd 6 4)
+(gcd 4 (remainder 6 4))
+(gcd 4 2)
+(gcd 2 (remainder 4 2))
+(gcd 2 0)
+
+remainder performed 4 times
+
+
+I was expected there to be a difference. Did I do the normal one wrong?
+I we don't evaluate b, then we never stop the recursion.
