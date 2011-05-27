@@ -116,9 +116,9 @@ My guess here is that the interpreter is attempting to continue expanding out 'n
 It would appear to me that the second example is more likely to be tail-recursive. But I'm not 100% sure of that.
 
 # Exercise 1.10
-	Looks to me like all of these will output 0?
+	first reaction: Looks to me like all of these will output 0?
 	y would continue to be decremented until it was equal to 0 (last line of the method)
-	However I could not get this to run in lazy scheme or mit scheme. :/
+	- nope. wrong.
 
 	(define (f n) (A 0 n))
 	= 2n
