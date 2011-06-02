@@ -36,12 +36,13 @@
  
 
 (define (simpsons-integral f a b n)
-  (define (h) (/ (- b a) n))
-  (define (y k) 
-    (let ((factor (cond ((= k 0) 1)
-                        ((= k n) 1)
-                        ((even? k) 2)
-                        (else 4))))
-      (* factor (f (+ a (* k (h)))))))
-  (* (/ (h) 3) (sum y 0 inc n)))
+  (define (factor k)
+    (cond ((= k 0) 1)
+          ((= k n) 1)
+          ((even? k) 2)
+          (else 4)))
+  (let ((h (/ (- b a) n)))
+    (define (y k) 
+      (* (factor k) (f (+ a (* k h)))))
+    (* (/ h 3) (sum y 0 inc n))))
     
