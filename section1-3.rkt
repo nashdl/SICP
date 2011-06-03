@@ -13,7 +13,13 @@
         result
         (iter (next a) (+ result (term a)))))
   (iter a 0))
-      
+     
+(define (product term a next b)
+  (if (> a b)
+      1
+      (* (term a)
+         (product term (next a) next b))))
+
 (define (cube x)
   (* x x x))
 
@@ -46,3 +52,12 @@
       (* (factor k) (f (+ a (* k h)))))
     (* (/ h 3) (sum y 0 inc n))))
     
+(define (factorial x)
+  (product identity 1 inc x))
+
+(define (pi-over-four b)
+  (define (term pred)
+    (lambda (n) (if (pred n) (+ n 1) (+ n 2))))
+  (define (series pred)
+    (product (term pred) 1 inc b))
+  (/ (series odd?) (series even?)))
