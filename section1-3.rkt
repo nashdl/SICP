@@ -14,12 +14,19 @@
         (iter (next a) (+ result (term a)))))
   (iter a 0))
      
-(define (product term a next b)
+(define (product-recur term a next b)
   (if (> a b)
       1
       (* (term a)
          (product term (next a) next b))))
 
+(define (product term a next b)
+  (define (iter a result)
+    (if (> a b)
+        result
+        (iter (next a) (* result (term a)))))
+  (iter a 1))
+        
 (define (cube x)
   (* x x x))
 
@@ -58,6 +65,7 @@
 (define (pi-over-four b)
   (define (term pred)
     (lambda (n) (if (pred n) (+ n 1) (+ n 2))))
-  (define (series pred)
-    (product (term pred) 1 inc b))
-  (/ (series odd?) (series even?)))
+  (let ((add-one-first (term odd?)) (add-two-first (term even?)))
+    (define (series term)   
+      (product term 1 inc b))
+  (/ (series add-one-first) (series add-two-first))))
