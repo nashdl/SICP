@@ -88,3 +88,36 @@
     (define (series term)   
       (product term 1 inc b))
     (/ (series add-one-first) (series add-two-first))))
+
+(define (square n)
+  (* n n))
+
+(define (prime? n)
+  (define (smallest-divisor n)
+    (find-divisor n 2))
+  (define (find-divisor n test-divisor)
+    (cond ((> (square test-divisor) n) n)
+          ((divides? test-divisor n) test-divisor)
+          (else (find-divisor n (inc test-divisor)))))
+  (define (divides? a b)
+    (= (remainder b a) 0))
+  (= n (smallest-divisor n)))
+
+
+(define (filtered-accumulate filter combiner null-value term a next b)
+  (define (iter a result)
+    (if (> a b)
+        result
+        (iter (next a) 
+              (if (filter a)
+                  (combiner result (term a))
+                  result))))
+  (iter a null-value))
+
+(define (sum-evens a b)
+  (filtered-accumulate even? + 0 identity a inc b))
+
+(define (sum-of-squares-of-primes a b)
+  (filtered-accumulate prime? + 0 square a inc b))
+
+
