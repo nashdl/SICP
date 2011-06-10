@@ -129,3 +129,6 @@
   (define (relatively-prime? x)
     (= 1 (gcd x n)))
   (filtered-accumulate relatively-prime? * 1 identity 2 inc n))
+
+(define (double f)
+  (lambda (x) (f (f x))))
