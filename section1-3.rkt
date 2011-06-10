@@ -120,4 +120,12 @@
 (define (sum-of-squares-of-primes a b)
   (filtered-accumulate prime? + 0 square a inc b))
 
+(define (gcd a b)
+  (if (= b 0)
+      a
+      (gcd b (remainder a b))))
 
+(define (product-of-relatively-primes n)
+  (define (relatively-prime? x)
+    (= 1 (gcd x n)))
+  (filtered-accumulate relatively-prime? * 1 identity 2 inc n))
