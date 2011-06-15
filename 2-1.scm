@@ -1,6 +1,6 @@
 #lang racket
 
-(require "shared.scm")
+(require "test.scm")
 
 (define (make-rat n d) 
   (let ((g (gcd n d)))
