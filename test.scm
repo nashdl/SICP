@@ -2,8 +2,8 @@
 
 (provide assert=)
 
-(define (assert= x y)
+(define (assert= expected actual)
   (newline)
-  (if (equal? x y)
+  (if (equal? expected actual)
       (displayln "Passed.")
-      (displayln (format "Expected ~a to equal ~a." x y))))
+      (displayln (format "Expected ~a to equal ~a." actual expected))))
