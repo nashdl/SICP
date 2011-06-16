@@ -3,9 +3,11 @@
 (require "test.scm")
 
 (define (make-rat n d)   
-  (define (same-sign?) (or (and (negative? n) (negative? d)) (and (positive? d) (positive? n))))
+  (define (same-sign?) (positive? (* n d)))
   (let ((g (gcd n d))
-        (numer-op (if (same-sign?) abs (lambda (x) (- (abs x))))))    
+        (numer-op (if (same-sign?) 
+                      abs 
+                      (lambda (x) (- (abs x))))))    
     (cons (/ (numer-op n) g) 
           (/ (abs d) g))))
 
