@@ -26,3 +26,47 @@
   (assert= '(-1 . 5) (make-rat -1 5))
   (assert= '(-1 . 5) (make-rat 1 -5))
   (assert= '(1 . 5) (make-rat 1 5)))
+
+(define (make-segment s e)
+  (cons s e))
+
+(define (start-segment seg)
+  (car seg))
+
+(define (end-segment seg)
+  (cdr seg))
+
+(define (make-point x y)
+  (cons x y))
+
+(define (x-point point)
+  (car point))
+
+(define (y-point point)
+  (cdr point))
+
+(define (print-point p)
+  (newline)
+  (display "(")
+  (display (x-point p))
+  (display ",")
+  (display (y-point p))
+  (display ")"))
+
+(define (midpoint-segment seg)
+  (define (avg x y) (/ (+ x y) 2))
+  (define (point-avg selector) 
+    (avg (selector (start-segment seg)) 
+         (selector (end-segment seg))))
+  (make-point (point-avg x-point)
+              (point-avg y-point)))
+
+(define (test-2.2)
+  (let ((seg (make-segment (make-point 1 3) (make-point 2 4))))
+    (assert= (make-point 3/2 7/2) (midpoint-segment seg)))
+  (let ((seg (make-segment (make-point 8 17) (make-point 4 21))))
+    (assert= (make-point 6 19) (midpoint-segment seg))))
+
+(define (all-tests)
+  (test-2.1)
+  (test-2.2))
