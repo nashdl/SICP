@@ -15,11 +15,14 @@
 
 (define (denom x) (cdr x))
 
-(define (print-rat x)
+(define (print-pair p first second sep)
   (newline)
-  (display (numer x))
-  (display "/")
-  (display (denom x)))
+  (display (first p))
+  (display sep)
+  (display (second p)))
+
+(define (print-rat x)
+  (print-pair x numer denom "/"))
 
 (define (test-2.1)
   (assert= '(1 . 5) (make-rat -1 -5))
@@ -46,12 +49,7 @@
   (cdr point))
 
 (define (print-point p)
-  (newline)
-  (display "(")
-  (display (x-point p))
-  (display ",")
-  (display (y-point p))
-  (display ")"))
+  (print-pair p x-point y-point ","))
 
 (define (midpoint-segment seg)
   (define (avg x y) (/ (+ x y) 2))
@@ -66,6 +64,9 @@
     (assert= (make-point 3/2 7/2) (midpoint-segment seg)))
   (let ((seg (make-segment (make-point 8 17) (make-point 4 21))))
     (assert= (make-point 6 19) (midpoint-segment seg))))
+
+
+
 
 (define (all-tests)
   (test-2.1)
